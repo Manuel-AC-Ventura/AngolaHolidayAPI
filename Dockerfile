@@ -26,9 +26,6 @@ COPY . /var/www
 # Instale as dependências do Composer
 RUN composer install
 
-# Copie o arquivo .env.example para .env e gere a chave do aplicativo
-RUN cp .env.example .env && php artisan key:generate
-
 # Exponha a porta 80 e inicie o servidor Apache
 EXPOSE 80
 CMD ["apache2-foreground"]
