@@ -1,0 +1,8 @@
+/vendor
+/node_modules
+.env
+.env.example
+.git
+.gitignore
+.DS_Store
+Thumbs.db
