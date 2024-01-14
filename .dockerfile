@@ -1,33 +1,34 @@
-FROM php:8.2.14-fpm
+# Use a imagem oficial do PHP 8.3 com Apache
+FROM php:8.3-apache
 
-# Instale as extensões PHP e o Composer
+# Atualize a lista de pacotes e instale as dependências necessárias
 RUN apt-get update && apt-get install -y \
     libmcrypt-dev \
-    mysql-client \
+    libzip-dev \
+    libonig-dev \
     zip \
     unzip \
     git \
-    curl \
-    libonig-dev \
-    libxml2-dev \
-    libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    locales \
-    libzip-dev \
-    libonig-dev \
-    jpegoptim optipng pngquant gifsicle \
-    && rm -rf /var/lib/apt/lists/* \
-    && docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath gd
+    curl
 
+# Instale as extensões PHP necessárias
+RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath
+
+# Instale o Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Defina o diretório de trabalho
 WORKDIR /var/www
 
+# Copie o aplicativo para o contêiner
 COPY . /var/www
 
+# Instale as dependências do Composer
 RUN composer install
 
-CMD php artisan serve --host=0.0.0.0 --port=8080
+# Copie o arquivo .env.example para .env e gere a chave do aplicativo
+RUN cp .env.example .env && php artisan key:generate
 
-EXPOSE 8080
+# Exponha a porta 80 e inicie o servidor Apache
+EXPOSE 80
+CMD ["apache2-foreground"]
