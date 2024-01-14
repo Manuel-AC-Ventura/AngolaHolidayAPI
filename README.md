@@ -2,33 +2,31 @@
 
 ## Descrição
 
-A AngolaHolidayAPI é uma API RESTful desenvolvida em PHP que permite verificar se uma data específica é um feriado ou fim de semana em Angola. A API utiliza a API do Google Calendar para obter informações sobre feriados.
+AngolaHolidayAPI é uma API baseada em Lumen que fornece informações sobre se uma data específica é um fim de semana ou feriado em Angola.
 
 ## Instalação
 
-1. Clone o repositório para o seu ambiente local.
-2. Instale as dependências do projeto com o Composer usando o comando `composer install`.
-3. Crie um arquivo `.env` na raiz do projeto e adicione a sua chave da API do Google Calendar como `GOOGLE_API_KEY`.
+1. Clone o repositório: `git clone https://github.com/seuusuario/AngolaHolidayAPI.git`
+2. Instale as dependências: `composer install`
+3. Copie o arquivo `.env.example` para `.env` e preencha as variáveis de ambiente necessárias.
+4. Inicie o servidor: `php -S localhost:8000 -t public`
 
 ## Uso
 
-Inicie o servidor PHP na raiz do projeto com o comando `php -S localhost:8000 -t public`. Agora você pode acessar a API em `http://localhost:8000`.
+A API tem três rotas:
 
-A API possui os seguintes endpoints:
-
-- `GET /`: Retorna uma mensagem de boas-vindas.
-- `POST /isWeekend`: Verifica se uma data é um fim de semana. A data deve ser enviada no corpo da solicitação no formato `{"date": "YYYY-MM-DD"}`.
-- `POST /isHoliday`: Verifica se uma data é um feriado. A data deve ser enviada no corpo da solicitação no formato `{"date": "YYYY-MM-DD"}`.
-- `POST /isHolidayOrWeekend`: Verifica se uma data é um feriado ou fim de semana. A data deve ser enviada no corpo da solicitação no formato `{"date": "YYYY-MM-DD"}`.
+- `/isWeekend`: Aceita uma data no formato 'YYYY-MM-DD' e retorna um valor booleano indicando se a data é um fim de semana.
+- `/isHoliday`: Aceita uma data no formato 'YYYY-MM-DD' e retorna um valor booleano indicando se a data é um feriado.
+- `/isHolidayOrWeekend`: Aceita uma data no formato 'YYYY-MM-DD' e retorna um valor booleano indicando se a data é um feriado ou fim de semana.
 
 ## Testes
 
-Os testes para a API estão no arquivo `AngolaHolidayAPITest.php`. Você pode executar os testes usando o PHPUnit com o comando `./vendor/bin/phpunit AngolaHolidayAPITest.php`.
+Para executar os testes, use o comando: `./vendor/bin/phpunit`
 
 ## Contribuição
 
-Contribuições são bem-vindas! Por favor, leia as diretrizes de contribuição antes de enviar uma pull request.
+Contribuições são bem-vindas! Por favor, leia as diretrizes de contribuição antes de enviar um pull request.
 
 ## Licença
 
-Este projeto está licenciado sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+Este projeto está licenciado sob a licença MIT.
