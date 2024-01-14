@@ -6,7 +6,7 @@ AngolaHolidayAPI é uma API baseada em Lumen que fornece informações sobre se 
 
 ## Instalação
 
-1. Clone o repositório: `git clone https://github.com/seuusuario/AngolaHolidayAPI.git`
+1. Clone o repositório: `git clone https://github.com/Manuel-AC-Ventura/AngolaHolidayAPI.git`
 2. Instale as dependências: `composer install`
 3. Copie o arquivo `.env.example` para `.env` e preencha as variáveis de ambiente necessárias.
 4. Inicie o servidor: `php -S localhost:8000 -t public`
