@@ -53,7 +53,4 @@ class AngolaHolidayAPIController extends Controller{
 		$isHolidayOrWeekend = $isHoliday || $isWeekend;
 		return response()->json(["isHolidayOrWeekend" => $isHolidayOrWeekend]);
 	}
-		
-
-	
 }
