@@ -17,10 +17,7 @@ use App\Http\Controllers\AngolaHolidayAPIController;
 */
 
 $router->get('/', function () use ($router) {
-    if(env('GOOGLE_API_KEY', null)){
-        return "Bem-vindo à API AngolaHoliday!";
-    }
-    return "Env vazio";
+    return "Bem-vindo à API AngolaHoliday!";
 });
 
 $router->post('/isWeekend', function(Request $request) use ($router){
