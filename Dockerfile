@@ -26,6 +26,9 @@ COPY . /var/www
 # Instale as dependências do Composer
 RUN composer install
 
+# Configure o Apache para servir o diretório public
+RUN sed -i 's!/var/www/html!/var/www/public!g' /etc/apache2/sites-available/000-default.conf
+
 # Exponha a porta 80 e inicie o servidor Apache
 EXPOSE 80
 CMD ["apache2-foreground"]
