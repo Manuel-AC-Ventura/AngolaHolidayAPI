@@ -1,34 +1,38 @@
-# Use a imagem oficial do PHP 8.3 com Apache
-FROM php:8.3-apache
+# Use the official PHP image as base image
+FROM php:latest
 
-# Atualize a lista de pacotes e instale as dependências necessárias
-RUN apt-get update && apt-get install -y \
-    libmcrypt-dev \
+# Install required dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
     libzip-dev \
-    libonig-dev \
-    zip \
     unzip \
-    git \
-    curl
+    && docker-php-ext-install zip pdo_mysql
 
-# Instale as extensões PHP necessárias
-RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath
+# Install Composer globally
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Instale o Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Set the working directory to /app
+WORKDIR /app
 
-# Defina o diretório de trabalho
-WORKDIR /var/www
+# Copy composer files and install dependencies
+COPY composer.json composer.lock /app/
+RUN composer install --no-dev
 
-# Copie o aplicativo para o contêiner
-COPY . /var/www
+# Copy the rest of the application code
+COPY . /app
 
-# Instale as dependências do Composer
-RUN composer install
+# Expose port 8000 for Laravel application
+EXPOSE 8000
 
-# Configure o Apache para servir o diretório public
-RUN sed -i 's!/var/www/html!/var/www/public!g' /etc/apache2/sites-available/000-default.conf
+# Set environment variables
+ENV APP_KEY=your_generated_app_key \
+    DB_CONNECTION=mysql \
+    DB_HOST=laravel \
+    DB_PORT=3306 \
+    DB_DATABASE=laravel \
+    DB_USERNAME=laravel_user \
+    DB_PASSWORD=your_generated_password \
+    PORT=8000
 
-# Exponha a porta 80 e inicie o servidor Apache
-EXPOSE 80
-CMD ["apache2-foreground"]
+# Command to start the Laravel application
+CMD ["php", "artisan", "serve", "--host", "0.0.0.0", "--port", "$PORT"]

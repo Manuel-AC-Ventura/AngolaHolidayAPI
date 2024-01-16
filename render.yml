@@ -1,0 +1,47 @@
+databases:
+  - name: laravel
+    databaseName: laravel
+    user: laravel_user
+
+services:
+  - type: web
+    name: laravel-app
+    env: php
+    buildCommand: "composer install --no-dev"
+    startCommand: "php artisan serve --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: APP_KEY
+        generateValue: true
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        fromDatabase:
+          name: laravel
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: laravel
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: laravel
+          property: databaseName
+      - key: DB_USERNAME
+        fromDatabase:
+          name: laravel
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: laravel
+          property: password
+  - type: mysql
+    name: laravel
+    envVars:
+      - key: MYSQL_ROOT_PASSWORD
+        generateValue: true
+      - key: MYSQL_DATABASE
+        value: laravel
+      - key: MYSQL_USER
+        value: laravel_user
+      - key: MYSQL_PASSWORD
+        generateValue: true
