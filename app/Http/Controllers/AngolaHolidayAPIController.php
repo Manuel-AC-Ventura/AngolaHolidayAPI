@@ -11,6 +11,9 @@ class AngolaHolidayAPIController extends Controller{
 
 	public function __construct(){
 		$this->apikey = env('GOOGLE_API_KEY', null);
+		if ($this->apikey === null) {
+			throw new \Exception('A chave da API do Google não está definida. Por favor, verifique o arquivo .env.');
+		}
 	}
 
 	private function isWeekend($date) {
