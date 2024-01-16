@@ -33,14 +33,3 @@ services:
         fromDatabase:
           name: AngolaHolidayAPI
           property: password
-  - type: mysql
-    name: AngolaHolidayAPI
-    envVars:
-      - key: MYSQL_ROOT_PASSWORD
-        generateValue: true
-      - key: MYSQL_DATABASE
-        value: AngolaHolidayAPI
-      - key: MYSQL_USER
-        value: AngolaHolidayAPI_user
-      - key: MYSQL_PASSWORD
-        generateValue: true
