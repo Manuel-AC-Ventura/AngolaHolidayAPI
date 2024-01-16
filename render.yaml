@@ -1,11 +1,10 @@
 databases:
-  - name: laravel
-    databaseName: laravel
-    user: laravel_user
-
+  - name: AngolaHolidayAPI
+    databaseName: AngolaHolidayAPI
+    user: AngolaHolidayAPI_user
 services:
   - type: web
-    name: laravel-app
+    name: AngolaHolidayAPI-app
     env: php
     buildCommand: "composer install --no-dev"
     startCommand: "php artisan serve --host 0.0.0.0 --port $PORT"
@@ -16,32 +15,32 @@ services:
         value: mysql
       - key: DB_HOST
         fromDatabase:
-          name: laravel
+          name: AngolaHolidayAPI
           property: host
       - key: DB_PORT
         fromDatabase:
-          name: laravel
+          name: AngolaHolidayAPI
           property: port
       - key: DB_DATABASE
         fromDatabase:
-          name: laravel
+          name: AngolaHolidayAPI
           property: databaseName
       - key: DB_USERNAME
         fromDatabase:
-          name: laravel
+          name: AngolaHolidayAPI
           property: user
       - key: DB_PASSWORD
         fromDatabase:
-          name: laravel
+          name: AngolaHolidayAPI
           property: password
   - type: mysql
-    name: laravel
+    name: AngolaHolidayAPI
     envVars:
       - key: MYSQL_ROOT_PASSWORD
         generateValue: true
       - key: MYSQL_DATABASE
-        value: laravel
+        value: AngolaHolidayAPI
       - key: MYSQL_USER
-        value: laravel_user
+        value: AngolaHolidayAPI_user
       - key: MYSQL_PASSWORD
         generateValue: true
