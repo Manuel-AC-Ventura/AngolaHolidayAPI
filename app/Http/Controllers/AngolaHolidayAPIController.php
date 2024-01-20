@@ -56,4 +56,17 @@ class AngolaHolidayAPIController extends Controller{
 		$isHolidayOrWeekend = $isHoliday || $isWeekend;
 		return response()->json(["isHolidayOrWeekend" => $isHolidayOrWeekend]);
 	}
+
+	public function listHolidaysRoute(Request $request){
+		$response = Http::get($this->apiUrl . $this->apikey);
+		$data = $response->json();
+		$holidays = [];
+		foreach ($data['items'] as $item) {
+			if (isset($item['start']['date'])) {
+				$holidayDate = substr($item['start']['date'], 0, 10);
+				$holidays[] = ['date' => $holidayDate, 'summary' => $item['summary']];
+			}
+		}
+		return response()->json(["holidays" => $holidays]);
+	}
 }

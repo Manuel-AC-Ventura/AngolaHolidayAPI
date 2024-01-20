@@ -35,6 +35,11 @@ $router->post('/isHolidayOrWeekend', function (Request $request) use ($router) {
     return $controller->isHolidayOrWeekendRoute($request);
 });
 
+$router->get('/listHoliday', function (Request $request) use ($router) {
+    $controller = new AngolaHolidayAPIController();
+    return $controller->listHolidaysRoute($request);
+});
+
 $router->get('/{route:.*}', function () {
     return response()->json(['message' => 'Rota GET não encontrada'], 404);
 });
