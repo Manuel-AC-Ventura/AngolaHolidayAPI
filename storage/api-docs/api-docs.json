@@ -1,0 +1,100 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Angola Holiday API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/listHolidays": {
+            "get": {
+                "operationId": "a5e2f446eaae06eff9c8ba48639a92f0",
+                "responses": {
+                    "200": {
+                        "description": "List of holidays"
+                    }
+                }
+            }
+        },
+        "/api/isWeekend": {
+            "post": {
+                "operationId": "87313693cf68bdc8013f96dd95edd462",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "date": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "date": "2024-03-09"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Check if a date is a weekend"
+                    }
+                }
+            }
+        },
+        "/api/isHoliday": {
+            "post": {
+                "operationId": "e499899dd8b5fd5f723ce04b1749a3f9",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "date": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "date": "2024-03-09"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Check if a date is a holiday"
+                    }
+                }
+            }
+        },
+        "/api/isHolidayOrWeekend": {
+            "post": {
+                "operationId": "879766c3ee62359b6e908a67d55c28b5",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "date": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "date": "2024-03-09"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Check if a date is a holiday or a weekend"
+                    }
+                }
+            }
+        }
+    }
+}
